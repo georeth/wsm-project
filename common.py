@@ -11,3 +11,5 @@ section_map = {
   "profile": 3,
   "expert": 4,
 }
+
+stopword_thres = 30000

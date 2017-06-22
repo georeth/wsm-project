@@ -2,8 +2,10 @@
 import time
 import json
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 from common import *
 app = Flask(__name__)
+CORS(app)
 
 import mongo_searcher as searcher
 # from token_wrapper import tokenize
@@ -13,13 +15,6 @@ def load_json_file(filename):
     data = f.read()
     return json.loads(data)
 
-def load_page(page_id):
-  if (page_id[0] == 'q'):
-    return load_json_file("question.json")
-  elif (page_id[0] == 'd'):
-    return load_json_file("doctor.json")
-  else:
-    return None
 
 @app.route("/")
 def hello():
@@ -27,7 +22,7 @@ def hello():
 
 @app.route("/search_all", methods=['POST'])
 def search_all():
-  content = request.get_json(silent=True)
+  content = request.get_json(force=True)
   options = {}
   if "region" in content:
     options['region'] = content["region"]
@@ -37,7 +32,12 @@ def search_all():
   result = searcher.search_all(content["s"], options)
   return jsonify(result)
 
-@app.route("/search_question", methods=['POST'])
-def search_question():
-  content = request.get_json(silent=True)
-  return jsonify([load_page('q')])
+@app.route("/search_doctor", methods=['POST'])
+def search_doctor():
+  content = request.get_json(force=True)
+
+  result = searcher.search_doctor(content["s"])
+  return jsonify(result)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port="8080")

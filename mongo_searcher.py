@@ -10,6 +10,7 @@ db = client.wsm
 
 tbl_page = db.tbl_page
 tbl_index = db.tbl_index
+tbl_answer = db.tbl_answer
 total_doc = db.tbl_page.count()
 
 def load_posting(token, options):
@@ -17,23 +18,17 @@ def load_posting(token, options):
   if 'region' in options:
     find_option['region'] = {'$in': options['region']}
 
-  print('fo', find_option)
-
   return list(tbl_index.find(find_option))
 
 def search_all(query_str, options):
   tokens = tokenize(query_str)
   doc2score = {}
-
   
   for w, _ in tokens:
       posting = load_posting(w, options)
-      print('posting', posting)
 
       doc2tf = {}
       for p in posting:
-        print("p=",p)
-        print("options=", options)
         doc = p['page_id']
         cnt = p['count']
         # FIXME
@@ -52,9 +47,9 @@ def search_all(query_str, options):
         doc2score.setdefault(doc, 0)
         df = len(doc2tf)
         if df:
-          print('df = {} total={} tf={}'.format(df, total_doc, tf))
+          # print('df = {} total={} tf={}'.format(df, total_doc, tf))
           doc2score[doc] += (1 + math.log10(tf)) * math.log10(total_doc / df)
-  print(doc2score)
+  # print(doc2score)
   result = list(doc2score.items())
   result.sort(key=lambda x: x[1], reverse=True)
 
@@ -67,3 +62,7 @@ def search_all(query_str, options):
     del doc['_id']
     docs.append(doc)
   return docs
+
+
+def search_doctor(query_str):
+  return search_all(query_str, { 'type': 'doctor' })

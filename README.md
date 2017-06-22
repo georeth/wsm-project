@@ -29,7 +29,7 @@ Interface:
 post /search_all {s: "query string", region: ["title", "detail"], type: "doctor"}
 parameter:
   s is query string
-  region is an array ("title" "detail" "name")
+  region is an array ("title" "detail" "answer" "name" "expert" "profile")
   type in ["doctor", "question"], or omit it
   
 => return all related pages in json
