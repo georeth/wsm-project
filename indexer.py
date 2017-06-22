@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import json
 import pickle
-from .token_wrapper import tokenize
+from token_wrapper import tokenize
 
 DOCTOR = 0
 QUESTION = 1
