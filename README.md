@@ -26,11 +26,13 @@ Web Server: Flask
 Interface:
 
 ```
-post /search_all {s: "keyword"}
+post /search_all {s: "query string", region: ["title", "detail"], type: "doctor"}
+parameter:
+  s is query string
+  region is an array ("title" "detail" "name")
+  type in ["doctor", "question"], or omit it
+  
 => return all related pages in json
-
-post /search_question {s: "question"}
-=> return all related question in json
 ```
 
 ## Frontend

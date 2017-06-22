@@ -10,6 +10,7 @@ from common import *
 # 1. token -> question
 # 2. (token, region) -> question
 # 3. token -> doctor
+stopword_thres = 5000
 
 total_doc = 0
 next_tid = 0
@@ -58,10 +59,10 @@ def index_question(question_str):
   index_region(question_id, ANSWER, reply_str)
 
 
-with open ("data/doctor.json", "r") as doc:
+with open("data/doctor.json", "r") as doc:
       data = doc.read()
       index_doctor(data)
-with open ("data/question.json", "r") as question:
+with open("data/question.json", "r") as question:
       data = question.read()
       index_question(data)
 
@@ -69,6 +70,8 @@ with open("data/index/tokens.pickle", "wb") as f:
   pickle.dump([total_doc, token2tid, tid2token], f)
 
 for t, p in tid2posting.items():
+  if len(p) > stopword_thres:
+    p = []
   with open("data/index/posting-{}.pickle".format(t), "wb") as f:
     pickle.dump(p, f)
 

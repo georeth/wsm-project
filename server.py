@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify
 from common import *
 app = Flask(__name__)
 
-import searcher
+import mongo_searcher as searcher
 # from token_wrapper import tokenize
 
 def load_json_file(filename):
@@ -28,12 +28,14 @@ def hello():
 @app.route("/search_all", methods=['POST'])
 def search_all():
   content = request.get_json(silent=True)
-  if "section" not in content:
-    sections = section_map.values()
-  else:
-    sections = {section_map[s] for s in content["section"]}
-  result = searcher.search_all(content["s"], sections)
-  return jsonify([load_page(r) for r in result])
+  options = {}
+  if "region" in content:
+    options['region'] = content["region"]
+  if "type" in content:
+    options['type'] = content["type"]
+
+  result = searcher.search_all(content["s"], options)
+  return jsonify(result)
 
 @app.route("/search_question", methods=['POST'])
 def search_question():
