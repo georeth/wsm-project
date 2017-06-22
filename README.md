@@ -12,7 +12,22 @@ FLASK_APP=server.py flask run
 
 ## Crawler
 
-## Index
+## Indexer
 Tokenizer: THULAC
-TF-IDF
+
+Inverted Index
+
+## Searcher
 Web Server: Flask
+
+Interface:
+
+```
+post /search_all {s: "keyword"}
+=> return all related pages in json
+
+post /search_question {s: "question"}
+=> return all related question in json
+```
+
+## Frontend
