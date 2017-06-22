@@ -2,6 +2,7 @@
 import time
 import json
 from flask import Flask, request, jsonify
+from common import *
 app = Flask(__name__)
 
 import searcher
@@ -27,7 +28,12 @@ def hello():
 @app.route("/search_all", methods=['POST'])
 def search_all():
   content = request.get_json(silent=True)
-  return jsonify([load_page('d'), load_page('q')])
+  if "section" not in content:
+    sections = section_map.values()
+  else:
+    sections = {section_map[s] for s in content["section"]}
+  result = searcher.search_all(content["s"], sections)
+  return jsonify([load_page(r) for r in result])
 
 @app.route("/search_question", methods=['POST'])
 def search_question():

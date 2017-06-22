@@ -2,15 +2,7 @@
 import json
 import pickle
 from token_wrapper import tokenize
-
-DOCTOR = 0
-QUESTION = 1
-
-TITLE = 0
-DETAIL = 1
-ANSWER = 2
-PROFILE = 3
-MEDICIAN = 4
+from common import *
 
 # entities: doctor, question, answers
 
@@ -19,6 +11,7 @@ MEDICIAN = 4
 # 2. (token, region) -> question
 # 3. token -> doctor
 
+total_doc = 0
 next_tid = 0
 token2tid = {}
 tid2token = {}
@@ -44,11 +37,17 @@ def index_region(page_id, region, region_str):
     tid2posting[tid].append((page_id, region, tf))
 
 def index_doctor(doc_str):
+  global total_doc
+  total_doc = total_doc + 1
+
   doc = json.loads(doc_str)
   doc_id = "d" + doc["doc_id"]
   index_region(doc_id, PROFILE, doc["profile"])
 
 def index_question(question_str):
+  global total_doc
+  total_doc = total_doc + 1
+
   question = json.loads(question_str)
   question_id = question["question_id"]
 
@@ -67,7 +66,12 @@ with open ("data/question.json", "r") as question:
       index_question(data)
 
 with open("data/index/tokens.pickle", "wb") as f:
-  pickle.dump([token2tid, tid2token], f)
+  pickle.dump([total_doc, token2tid, tid2token], f)
+
+for t, p in tid2posting.items():
+  with open("data/index/posting-{}.pickle".format(t), "wb") as f:
+    pickle.dump(p, f)
+
 
 # print("token2tid", token2tid)
 # print("tid2token", tid2token)
