@@ -4,7 +4,7 @@ import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from common import *
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 CORS(app)
 
 import mongo_searcher as searcher

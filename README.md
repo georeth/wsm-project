@@ -2,13 +2,27 @@ Web Search and Mining Group Project
 ========
 
 # Install
+```
+pip3 install flask pymongo jieba
+./server.py
+```
+
+# Structure
 
 ```
-wget http://thulac.thunlp.org/source/Models_v1_v2.zip
-# extract and move `models` directory into `thulac`
-
-pip3 install flask
-FLASK_APP=server.py flask run
+.
+├── README.md
+├── common.py
+├── data
+│   ├── doctor-all.json
+│   ├── doctor.json
+│   ├── question-all.json
+│   └── question.json
+├── mongo_indexer.py
+├── mongo_searcher.py
+├── server.py
+├── token_wrapper.py
+└── wsm-document.docx
 ```
 
 # Design
