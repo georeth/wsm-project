@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WSM-Proj</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/advanced.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="container">
+	<div id="hd" class="ue-clear">
+    	<div class="logo"></div>
+        <div class="inputArea">
+        	<input type="text" class="searchInput" />
+            <input type="button" class="searchButton" />
+            <a class="back" href="index.html">返回主页</a>
+        </div>
+    </div>
+    <div class="divsion"></div>
+	<div id="bd">
+        <div id="main">
+        	<div class="subfield">高级搜索</div>
+            <div class="subfieldContent">
+            	<!--搜索范围-->
+                <dl class="ue-clear advanceItem qod">
+                	<dd>
+                    	<label>搜索范围</label>
+                        <span>选择要搜索的范围</span>
+                    </dd>
+                    <dt class="fillInArea">
+                    	<span class="choose">
+                            <input name="scope" type="radio" id="qas">
+                            <span class="text">Q&A</span>
+                        </span>
+                        <span class="choose">
+                        <input type="radio" name="scope" id="docr">
+                            <span class="text">医生</span>
+                        </span>
+                        <span class="choose">
+                        <input type="radio" name="scope" checked="checked" id="ftxt">
+                            <span class="text">全部</span>
+                        </span>
+                    </dt>
+                </dl>
+                
+                <!--搜索关键字-->
+                <dl class="ue-clear advanceItem keyWords">
+                	<dd>
+                    	<label>搜索关键字</label>
+                        <div class="tips">
+                        	<p class="tip">包含以下<span class="impInfo">关键词</span></p>
+                        </div>
+                    </dd>
+                    <dt class="fillInArea">
+                    	<p><input type="text" id="stxt"/></p>
+                    </dt>
+                </dl>
+
+                <!--文件类型-->
+                <dl class="ue-clear advanceItem coln">
+                    <dd>
+                        <label>搜索字段</label>
+                        <span>指定的字段</span>
+                    </dd>
+                    <dt class="fillInArea">
+                    	<span class="choose">
+                            <input name="type" type="checkbox" checked="checked" id="title">
+                            <span class="text">问题标题</span>
+                        </span>
+                        <span class="choose">
+                        <input type="checkbox" name="type" id="detail">
+                            <span class="text">问题详情</span>
+                        </span>
+                        <span class="choose">
+                            <input type="checkbox" name="type" id="answer">
+                            <span class="text">问题回复</span>
+                        </span>
+                        <span class="choose">
+                            <input type="checkbox" name="type" id="name">
+                            <span class="text">医生姓名</span>
+                        </span>
+                        <span class="choose">
+                            <input type="checkbox" name="type" id="expert">
+                            <span class="text">擅长疾病</span>
+                        </span>
+                        <span class="choose">
+                            <input type="checkbox" name="type" id="profile">
+                            <span class="text">医生简介</span>
+                        </span>
+                    </dt>
+                </dl>
+
+                <div class="button">
+                	<input type="button" class="search" value="立刻搜索" />
+                </div>
+            </div>
+        </div><!-- End of main -->
+    </div><!--End of bd-->
+    
+    
+</div>
+<div id="foot">Copyright &copy;SJTU 版权所有</div>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/advanced.js"></script>
+</html>
